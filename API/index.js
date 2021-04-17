@@ -37,7 +37,7 @@ var queryLiteDispositivo =
 CREATE TABLE IF NOT EXISTS Dispositivos( \
     dispositivoId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, \
     nombre TEXT, \
-    ubicacion TEXT, \
+    ubicacion TEXT \
     );";
 
 var queryLiteMediciones =
@@ -81,6 +81,7 @@ app.get("/", cors(corsOptions), (req, res) => {
     res.render("index.html");
 });
 
+
 //=======[ listar dispositivos ]==================================================
 
 app.get("/dispositivos/", cors(corsOptions), function(req, res) {
@@ -121,7 +122,6 @@ app.get(
 
 /*********************[ rellenar valores iniciarles - test ]********************************************************** */
 app.get("/inicializar/", function(req, res) {
-    db.run(queryInsertarElectrovalvulas);
     db.run(queryInsertarDispositivo);
     db.run(queryInsertarMediciones);
     res.send("BD inicializado...");
