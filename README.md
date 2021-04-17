@@ -1,5 +1,3 @@
-# tp-daiot
-
 ## Proyecto DA - IOT - UBA
 
 Autores:
