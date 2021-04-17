@@ -2,8 +2,9 @@
 
 ## Proyecto DA - IOT - UBA
 
-Autor:
+Autores:
 * Iván Cruz Flores
+* Jose Severiche
 
 Docente:
 
