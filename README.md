@@ -9,9 +9,9 @@ Docente:
 * Gustavo Ramoscelli
 
 ## Este proyecto esta formado por:
-* Backend: ...
-* Frontend: ...
-* Base Datos: ...
+* Backend: node JS
+* Frontend: Bootstrap
+* Base Datos: Sqlite
 
 ## Dashboard Principal:
 Vista principal de la aplicación:
