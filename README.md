@@ -19,6 +19,7 @@ Docente:
 
 ## Dashboard Principal:
 Vista principal de la aplicación:
+
 ![dashboard](imagenes/Inicio.PNG)
 
 ## Prerequisitos para el proyecto:
@@ -31,6 +32,7 @@ Vista principal de la aplicación:
 
 ## Arquitectura de componentes:
 
+![aquitectura](imagenes/arquitectura.png)
 
 ## Instalacion de dependencias:
 Despues de clonar el repositorio se debe instalar las dependencias npm:
