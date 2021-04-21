@@ -1,7 +1,7 @@
 //******************************************** */
 var TEMPERATURA = 0;
 var HUMEDAD = 0;
-var SERVER = "192.168.1.129";
+var SERVER = "192.168.1.39";
 var PUERTO = 9001;
 
 // Create a client instance
@@ -16,8 +16,8 @@ client.onMessageArrived = function(message) {
     console.log("Message llega: " + message.payloadString);
 
     var data_json = JSON.parse(message.payloadString);
-    TEMPERATURA = Number(data_json.temp);
-    HUMEDAD = Number(data_json.hum);
+    TEMPERATURA = Number(data_json.temperatura);
+    HUMEDAD = Number(data_json.humedad);
     document.getElementById("humedad").innerHTML = HUMEDAD + "%";
     document.getElementById("temperatura").innerHTML = TEMPERATURA + "°";
 }
@@ -25,15 +25,15 @@ client.onMessageArrived = function(message) {
 // Called when the connection is made
 function onConnect() {
     console.log("conectado al broker...");
-    client.subscribe("envio/datos");
+    client.subscribe("publish/data");
 }
 
 // Connect the client, providing an onConnect callback
 client.connect({
     onSuccess: onConnect,
-    userName: "useriot",
-    password: "12345678"
-        //mqttVersion: 3
+   // userName: "useriot",
+   // password: "12345678"
+      mqttVersion: 3
 });
 
 //**************** GRAFICO HUMEDAD*************************** */
