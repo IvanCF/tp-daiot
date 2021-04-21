@@ -52,7 +52,7 @@ node index.js
 
 2.- Para levantar la aplicación service debera copiar la carpeta "Frontend" y colocarlo dentro de la ruta de la carpeta del web server (por ejemplo: C:\xampp\htdocs), luego levantar el server web Apache.
 ```diff
-ingresar en el navegador a: http://localhost:8080/Frontend/
+Abrir el navegador e ingresar a: http://localhost:8080/Frontend/
 
 ```
 
@@ -101,7 +101,7 @@ Inicio de la aplicación.
 
 ![oepraciones](imagenes/Inicio.PNG)
 
-Opción Operaciones .
+Interfaz de Operaciones .
 
 ![operaciones](imagenes/Operaciones.PNG)
 
