@@ -22,7 +22,7 @@ Vista principal de la aplicación:
 
 ![dashboard](imagenes/Inicio.PNG)
 
-## Prerequisitos para el proyecto:
+## Prerrequisitos para el proyecto:
 * Node js.
 * Express js.
 * Npm.
