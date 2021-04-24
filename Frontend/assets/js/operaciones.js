@@ -24,7 +24,7 @@ client.onMessageArrived = function(message) {
 
 
     var hoy = new Date();
-    var time = hoy.getHours() + " : " + hoy.getMinutes() + " : " + hoy.getSeconds() + " : " + hoy.getMilliseconds()
+    var time = hoy.getHours() + " : " + hoy.getMinutes() + " : " + hoy.getSeconds();
     mensaje = mensaje + time + " << " + message.payloadString + "\n";
     document.getElementById("mensajes").innerHTML = mensaje;
     indicador = indicador + 1;
@@ -32,6 +32,12 @@ client.onMessageArrived = function(message) {
         indicador = 0;
         mensaje = "";
     }
+	
+	//enviar a la BD
+    var fecha = hoy.getFullYear() + "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate();
+    var fecha_time = fecha + " | " + hoy.getHours() + " : " + hoy.getMinutes() + " : " + hoy.getSeconds();
+    registrarMediciones(fecha_time, TEMPERATURA, 1, "activo");
+    registrarMediciones(fecha_time, HUMEDAD, 2, "activo");
 }
 
 // Called when the connection is made
@@ -43,20 +49,28 @@ function onConnect() {
 // Connect the client, providing an onConnect callback
 client.connect({
     onSuccess: onConnect,
-   // userName: "useriot",
-   // password: "12345678"
-      mqttVersion: 3
+    mqttVersion: 3
 });
 
 
 function prenderLed() {
     console.log("Envio >> PRENDER");
     enviarMensaje("1", "state/led");
+	
+	var hoy = new Date();
+    var fecha = hoy.getFullYear() + "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate();
+    var fecha_time = fecha + " | " + hoy.getHours() + " : " + hoy.getMinutes() + " : " + hoy.getSeconds();
+    registrarAccion(fecha_time, "1", 3, "ENCENDIDO");
 }
 
 function apagarLed() {
     console.log("Envio >> APAGAR");
     enviarMensaje("0", "state/led");
+	
+	 var hoy = new Date();
+    var fecha = hoy.getFullYear() + "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate();
+    var fecha_time = fecha + " | " + hoy.getHours() + " : " + hoy.getMinutes() + " : " + hoy.getSeconds();
+    registrarAccion(fecha_time, "0", 3, "APAGADO");
 }
 
 function reconfigurar() {

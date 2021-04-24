@@ -48,7 +48,7 @@ var queryLiteMediciones =
     valor TEXT, \
     dispositivoId INTEGER NOT NULL, \
     estado TEXT, \
-    FOREIGN KEY(dispositivoId) REFERENCES Electrovalvulas(dispositivoId) \
+    FOREIGN KEY(dispositivoId) REFERENCES Dispositivos(dispositivoId) \
   );";
 
 db.run(queryLiteDispositivo);
@@ -58,7 +58,8 @@ var queryInsertarDispositivo =
     "\
 INSERT INTO Dispositivos (nombre, ubicacion) VALUES \
     ('Sensor Temp. Exterior', 'Patio'), \
-    ('Sensor Hum. Exterior', 'Jardin Delantero');";
+	('Sensor Hum. Exterior', 'Jardin Delantero'), \
+    ('Actuador Led', 'ESP32');";
 
 
 var queryInsertarMediciones =
@@ -98,16 +99,17 @@ app.get("/dispositivos/", cors(corsOptions), function(req, res) {
 
 /**************[ agregar mediciones ]***************************************** */
 app.get(
-    "/addMediciones/:fecha/:valor/:dispositivoId",
+    "/addMediciones/:fecha/:valor/:dispositivoId/:estado",
     cors(corsOptions),
     function(req, res) {
         const nueva_medida = [
             req.params.fecha,
             req.params.valor,
             req.params.dispositivoId,
+            req.params.estado
         ];
         db.run(
-            "INSERT INTO Mediciones(fecha, valor, dispositivoId,'') VALUES(?,?,?)",
+            "INSERT INTO Mediciones(fecha, valor, dispositivoId,estado) VALUES(?,?,?,?)",
             nueva_medida,
             function(err) {
                 if (err) {
@@ -142,3 +144,61 @@ app.get("/mediciones/:id", cors(corsOptions), function(req, res) {
         return res.send(respuesta);
     });
 });
+
+/*************************[ listar mediciones  ]********************************************************* */
+
+app.get("/mediciones/", cors(corsOptions), function(req, res) {
+    var SQL = "SELECT *FROM Mediciones";
+
+    db.all(SQL, [], function(err, respuesta) {
+        if (err) {
+            res.send(err).status(400);
+            return;
+        }
+
+        return res.send(respuesta);
+    });
+});
+
+/*************************[ listar mediciones  con JOIN ]********************************************************* */
+
+app.get("/medicionesRelacionadas/", cors(corsOptions), function(req, res) {
+    var SQL = "SELECT  Mediciones.medicionId AS codigo, Mediciones.fecha,Mediciones.valor,Dispositivos.nombre, Mediciones.estado \
+               FROM Mediciones \
+               INNER JOIN Dispositivos \
+               WHERE Mediciones.dispositivoId=Dispositivos.dispositivoId";
+
+    db.all(SQL, [], function(err, respuesta) {
+        if (err) {
+            res.send(err).status(400);
+            return;
+        }
+
+        return res.send(respuesta);
+    });
+});
+
+/**************[ agregar accion led ]***************************************** */
+app.get(
+    "/addAccion/:fecha/:valor/:dispositivoId/:estado",
+    cors(corsOptions),
+    function(req, res) {
+        const nueva_medida = [
+            req.params.fecha,
+            req.params.valor,
+            req.params.dispositivoId,
+            req.params.estado
+        ];
+        db.run(
+            "INSERT INTO Mediciones(fecha, valor, dispositivoId,estado) VALUES(?,?,?,?)",
+            nueva_medida,
+            function(err) {
+                if (err) {
+                    return console.log(err.message);
+                }
+                console.log("se agrego!");
+                res.json("{registro acción. correcto:ok}"); // ionic espera un json
+            }
+        );
+    }
+);

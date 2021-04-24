@@ -80,9 +80,12 @@ El archivo de BD esta dentro del directorio llamado API y para visualizar sus va
 
 ## Operaciones API
 * http://localhost:3001/inicializar/ : inicializar los valores por defecto cuando la BD esta vacia.
+* http://localhost:3001/mediciones/ : retorna un JSON con los datos del registro de mediciones.
 * http://localhost:3001/mediciones/:id : retorna un JSON con los datos del registro de mediciones por código ID.
+* http://localhost:3001/medicionesRelacionadas/ :  retorna un JSON con los datos del registro de mediciones con INNER JOIN dispositivos.
 * http://localhost:3001/dispositivos/ : retorna JSON con los dispositivos de la Base de Datos.
 * http://localhost:3001/addMediciones/fecha/valor/dispositivoId : registra una nueva medición.
+* http://localhost:3001/addAccion/fecha/valor/dispositivoId/estado : registra una nueva acción hacia el led de prueba.
 
 ## Operaciones Frontend:
 * Visualiza en modo gráfico en tiempo real el valor de la Temperatura.
@@ -91,21 +94,26 @@ El archivo de BD esta dentro del directorio llamado API y para visualizar sus va
 * Encender o Apagar un led desde la aplicación.
 * Registrar las mediciones del sensor de temperatura.
 * Registrar las mediciones del sensor de humedad.
-* Resgistrar el estado actual de led Encendido/Apagado.
+* Registrar el estado actual de led Encendido/Apagado.
 * Listar los registros de las mediciones del sensor de temperatura.
 * Listar los registros de las mediciones del sensor de humedad.
+* Listar los registros de las acciones del led de prueba.
 
 
 
 ## GUI de la App:
 
-Inicio de la aplicación.
+Inicio de la Aplicación.
 
-![oepraciones](imagenes/Inicio.PNG)
+![oepracionesInicio](imagenes/Inicio.PNG)
 
 Interfaz de Operaciones .
 
 ![operaciones](imagenes/Operaciones.PNG)
+
+Interfaz de Consultas.
+
+![operacionesConsultas](imagenes/Consultas.png)
 
 
 

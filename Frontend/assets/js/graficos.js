@@ -20,6 +20,13 @@ client.onMessageArrived = function(message) {
     HUMEDAD = Number(data_json.humedad);
     document.getElementById("humedad").innerHTML = HUMEDAD + "%";
     document.getElementById("temperatura").innerHTML = TEMPERATURA + "°";
+	
+	  //enviar a la BD
+    var hoy = new Date();
+    var fecha = hoy.getFullYear() + "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate();
+    var fecha_time = fecha + " | " + hoy.getHours() + " : " + hoy.getMinutes() + " : " + hoy.getSeconds();
+    registrarMediciones(fecha_time, TEMPERATURA, 1, "activo");
+    registrarMediciones(fecha_time, HUMEDAD, 2, "activo");
 }
 
 // Called when the connection is made
@@ -31,8 +38,6 @@ function onConnect() {
 // Connect the client, providing an onConnect callback
 client.connect({
     onSuccess: onConnect,
-   // userName: "useriot",
-   // password: "12345678"
       mqttVersion: 3
 });
 

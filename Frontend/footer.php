@@ -36,6 +36,9 @@
 <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
+<!--- se usa en todo -->
+<script src="assets/js/serviceAPI.js"></script>
+
 
 <?php 
     $archivo_actual = basename($_SERVER['PHP_SELF']); 
@@ -62,18 +65,16 @@
 <!-- DATA TABLE SCRIPTS -->
 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+
+
 <script>
 $(document).ready(function() {
-    $('#dataTables-example').dataTable();
+
+    listarMediciones();
+
 });
 </script>
-<!-- Custom Js 
-    <script src="assets/js/custom-scripts.js"></script> -->
-
-
-
 <?php } ?>
-
 
 
 
